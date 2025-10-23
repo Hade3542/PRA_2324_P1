@@ -50,8 +50,10 @@ public:
     }
 
     // Métodos heredados de List<T> (esqueleto mínimo)
-    int size() const override { return n; }
-    bool empty() const override { return n == 0; }
+    // Métodos heredados de List<T>
+    int size() override { return n; }
+    bool empty() override { return n == 0; }
+
     void insert(int pos, T e) override {
         if (pos < 0 || pos > n)
             throw std::out_of_range("Posición inválida");
@@ -91,7 +93,7 @@ public:
         return data;
     }
 
-    T get(int pos) const override {
+    T get(int pos) override {
         if (pos < 0 || pos >= n)
             throw std::out_of_range("Posición inválida");
         Node<T>* aux = first;
@@ -100,7 +102,7 @@ public:
         return aux->data;
     }
 
-    int search(T e) const override {
+    int search(T e) override {
         Node<T>* aux = first;
         int pos = 0;
         while (aux != nullptr) {
@@ -111,5 +113,7 @@ public:
         }
         return -1;
     }
-};
 
+    void append(T e) override { insert(n, e); }
+    void prepend(T e) override { insert(0, e); }
+};
